@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>跑马灯</title>
+</head>
+<script src="../lib/vue.js"></script>
+<body>
+    <div id="app">
+        <input type="button" value="run" @click="run">
+        <input type="button" value="stop" @click="stop">
+        <h3>{{ msg }}</h3>
+    </div>
+<script>
+    var vm=new Vue({
+        el:"#app",
+        data:{
+            msg:"欢迎来到我的网站！"
+        },
+        methods:{
+            run:function(){
+                if(this.timeid!=null)return;
+                var _this=this
+                this.timeid=setInterval(function(){
+                    //获取第一个字符
+                    var start=_this.msg.substring(0,1);
+                    //获取后面的字符
+                    var end=_this.msg.substring(1);
+                    _this.msg=end+start;
+                },400)
+            },
+            stop:function(){
+                clearInterval(this.timeid);
+                this.timeid=null;
+            }
+        }
+    })
+</script>
+</body>
+</html>
